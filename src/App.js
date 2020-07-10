@@ -6,8 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // git project https://github.com/erikflowers/weather-icons
 import "weather-icons/css/weather-icons.css";
+import Home from "./app_component/Home";
+import WeekContainer from "./container/weekContainer";
 
 const Api_Key = "429736441cf3572838aa10530929f7cd";
+// 6c56f74aff6349f9e141d96758e59f8b
 
 class App extends React.Component {
   constructor() {
@@ -107,6 +110,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Form loadweather={this.getWeather} error={this.state.error} />
+        <Home/>
+        <WeekContainer/>
         <Weather
           cityname={this.state.city}
           weatherIcon={this.state.icon}
