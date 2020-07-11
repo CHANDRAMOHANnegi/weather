@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "weather-icons/css/weather-icons.css";
 import Home from "./app_component/Home";
 import WeekContainer from "./container/weekContainer";
+import LocationContextProvider from "./_context/locationContext";
 
 const Api_Key = "429736441cf3572838aa10530929f7cd";
 // 6c56f74aff6349f9e141d96758e59f8b
@@ -77,6 +78,9 @@ class App extends React.Component {
     const country = e.target.elements.country.value;
     const city = e.target.elements.city.value;
 
+    console.log(city, country);
+
+
     if (country && city) {
       const api_call = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`
@@ -110,8 +114,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Form loadweather={this.getWeather} error={this.state.error} />
-        <Home/>
-        <WeekContainer/>
+
+        <LocationContextProvider>
+          <Home />
+        </LocationContextProvider>
         <Weather
           cityname={this.state.city}
           weatherIcon={this.state.icon}

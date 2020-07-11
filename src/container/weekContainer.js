@@ -1,5 +1,6 @@
 import React from 'react';
 import DayCard from '../app_component/weekweather/DayCard';
+import HourlyChart from '../app_component/HourlyChart';
 
 class WeekContainer extends React.Component {
     state = {
@@ -10,18 +11,19 @@ class WeekContainer extends React.Component {
     componentDidMount = () => {
 
         console.log(this.props);
+        const position = this.props;
 
-        let country = 'In';
-        let city = 'Delhi'
+        let country = position.country ? position.country : 'In';
+        let city = position.city ? position.city : 'Delhi';
 
-        let lat = "28.541100";
-        let long = "77.281677";
+        let lat = position.lat ? position.lat : "28.541100";
+        let lon = position.lon ? position.lon : "77.281677";
 
 
 
-        let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=429736441cf3572838aa10530929f7cd`
+        let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=429736441cf3572838aa10530929f7cd`
 
-        const weatherURL = "http://api.openweathermap.org/data/2.5/forecast?q=Delhi,iN&APPID=429736441cf3572838aa10530929f7cd"
+        const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=429736441cf3572838aa10530929f7cd`
 
         fetch(weatherURL)
             .then(res => res.json())
@@ -29,9 +31,6 @@ class WeekContainer extends React.Component {
                 console.log(data);
 
                 const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
-
-
-
                 this.setState({
                     fullData: data.list,
                     dailyData: dailyData
@@ -52,6 +51,9 @@ class WeekContainer extends React.Component {
                     {this.formatDayCards()}
 
                 </div>
+
+                <HourlyChart />
+
             </div>
         )
     }

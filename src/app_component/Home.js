@@ -1,37 +1,88 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SearchButton from './SeachButton';
+import WeekContainer from '../container/weekContainer';
+import { LocationContext } from '../_context/locationContext';
 
 // API key of the google map
 const GOOGLE_MAP_API_KEY = 'AIzaSyCp8Z7yuvwUud3KyBdUkQsq8M3ysD9eXxQ';
 
-// load google map script
-const loadGoogleMapScript = (callback) => {
-    if (typeof window.google === 'object' && typeof window.google.maps === 'object') {
-        callback();
-    } else {
-        const googleMapScript = document.createElement("script");
-        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`;
-        window.document.body.appendChild(googleMapScript);
-        googleMapScript.addEventListener("load", callback);
+class Home extends React.Component {
+
+    state = {
+        map: false,
+        position: {}
     }
-}
+    // load google map script
+    loadGoogleMapScript = (callback) => {
+        if (typeof window.google === 'object' && typeof window.google.maps === 'object') {
+            callback();
+        } else {
+            const googleMapScript = document.createElement("script");
+            googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`;
+            window.document.body.appendChild(googleMapScript);
+            googleMapScript.addEventListener("load", callback);
+        }
+    }
 
-const Home = () => {
-    const [loadMap, setLoadMap] = useState(false);
 
-    useEffect(() => {
-        loadGoogleMapScript(() => {
-            setLoadMap(true)
+
+    componentDidMount() {
+
+        console.log("-------------------------");
+
+        // window.onload = function () {
+        //     var startPos;
+        //     var geoSuccess = function (position) {
+        //       startPos = position;
+        //       console.log(position)
+        //     //   latitude = startPos.coords.latitude;
+        //     //   longitude = startPos.coords.longitude;
+        //     //   locationName = " ";
+
+        //     };
+        //     var geoError = function (error) {
+        //       console.log('Error occurred. Error code: ' + error.code);
+        //       // error.code can be:
+        //       //   0: unknown error
+        //       //   1: permission denied
+        //       //   2: position unavailable (error response from location provider)
+        //       //   3: timed out
+        //     };
+        //     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+        //   };
+
+        // fetch('http://ip-api.com/json')
+        //     .then(res => res.json()).then(data => {
+        //         const { city, country, lat, lon } = data;
+        //         this.setState({ position: { city, country, lat, lon } })
+        //         console.log(data);
+        //     }).catch(err => {
+        //         console.log(err);
+        //     })
+
+        this.loadGoogleMapScript(() => {
+            this.setState({ map: true })
         });
-    }, []);
+    }
 
-    return (
-        <div className="App">
-            {!loadMap ? <div>Loading...</div> : <SearchButton />}
+    render() {
+        // console.log(this.state);
 
-            
-        </div>
-    );
+        // const { position } = this.state.position;
+
+        return (
+            <LocationContext.Consumer>{
+                (context) => {
+                    console.log(context);
+                    const { position } = context.location;
+                    return <div className="App">
+                        {!this.state.map ? <div>Loading...</div> : <SearchButton position={position} setCurrentLocation={context.setCurrentLocation}/>}
+                        <WeekContainer position={position} />
+                    </div>
+                }}
+            </LocationContext.Consumer>
+        )
+    }
 }
 
 export default Home;
