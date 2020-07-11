@@ -1,13 +1,8 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { LocationContext } from "../_context/locationContext";
 import { TextField } from "@material-ui/core";
-
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const SearchButton = (props) => {
@@ -17,9 +12,6 @@ const SearchButton = (props) => {
 
   useEffect(() => {
 
-    console.log(props);
-    
-
     let v = props.position.city + " , " + props.position.country
     setValue(v)
     initPlaceAPI();
@@ -28,13 +20,10 @@ const SearchButton = (props) => {
 
   // initialize the google place autocomplete
   const initPlaceAPI = () => {
-console.log('----------------------------',placeInputRef.current);
 
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current);
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
-
-      // console.log(place);
 
       const places = place.formatted_address.split(',');
 
@@ -46,30 +35,14 @@ console.log('----------------------------',placeInputRef.current);
         lon: place.geometry.location.lng(),
         city,
         country
-
       }
-
       setValue()
-
-      console.log(props.position.city + " , " + props.position.country);
-
       props.setCurrentLocation(position);
-      // setPlace({
-      //   address: place.formatted_address,
-      //   lat: place.geometry.location.lat(),
-      //   lng: place.geometry.location.lng()
-      // });
     });
-
   };
-
-  console.log(value);
-
-
 
   return (
     <React.Fragment>
-
       <FormControl >
         <TextField
           id="input-with-icon-adornment"

@@ -12,7 +12,7 @@ class ThemeContextProvider extends Component {
             color: "#282c34",
             linkColor: "#61dafb",
             logoBackground: "red",
-            
+
             border: 'rgba(0,0,0,.2)',
         },
         dark: {
@@ -24,8 +24,6 @@ class ThemeContextProvider extends Component {
             border: 'rgba(255,255,255,.1)',
         },
     }
-
-
 
     toggleTheme = () => {
         this.setState({ isLightTheme: !this.state.isLightTheme })
@@ -39,9 +37,6 @@ class ThemeContextProvider extends Component {
             </ThemeContext.Provider>
         );
     }
-
-
-
 }
 
 

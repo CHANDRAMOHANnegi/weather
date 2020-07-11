@@ -19,6 +19,7 @@ class WeekContainer extends React.Component {
                         console.log(context);
                         if (currentWeather) {
                             const dailyData = currentWeather.dailyData
+                            const hourlyData = currentWeather.hourlyData
                             return (<div>
                                 <div style={{}} >
                                     {dailyData && <DayCard />}

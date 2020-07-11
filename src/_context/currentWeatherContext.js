@@ -22,60 +22,29 @@ const CurrentWeatherContextProvider = (props) => {
     };
 
     useEffect(() => {
-
-        console.log(locationContext);
-
         const location = locationContext.location;
-
         if (location) {
-
-
-            let { country, city, lat, lon } = location.position
-            // console.log("0000000000000000000000000000000000000", country, city)
-
-            // console.log("===================================", country, city);
-
-            country = country ? country : 'In';
-            city = city ? city : 'Delhi';
-
-
+            let { lat, lon } = location.position
             lat = lat ? lat : "28.541100";
             lon = lon ? lon : "77.281677";
 
-            let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=429736441cf3572838aa10530929f7cd`
+            let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=429736441cf3572838aa10530929f7cd`
 
-            // const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=429736441cf3572838aa10530929f7cd`
-
-            fetch(y)
+            fetch(url)
                 .then(res => res.json())
                 .then(data => {
-
-                    console.log(data);
-
-
                     const dailyData = data.daily;//.filter(reading => reading.dt_txt.includes("18:00:00"))
-                    // console.log("===================", dailyData);
-
-
                     setSelectedDayWeather(dailyData[0])
-
-                    console.log("======----------------");
                     let hourly1 = data.hourly;
-
                     let hourly2 = hourly1.splice(24);
                     setCurrentWeather({
                         hourlyData: { hourly1, hourly2 },
                         dailyData: dailyData
                     })
-
-                    // console.log(dailyData[0]);
-
-
-                    // setSelectedDayWeather(dailyData[0])
                 })
         }
 
-    }, [locationContext.location.position]);
+    }, [locationContext.location]);
 
     return (
         <CurrentWeatherContext.Provider

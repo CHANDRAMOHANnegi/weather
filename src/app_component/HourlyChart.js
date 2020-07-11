@@ -8,6 +8,7 @@ export default class HourlyChart extends React.Component {
 
 
     state = {
+        data: true,
         labels: ['January', 'February', 'March',
             'April', 'May'],
         datasets: [
@@ -25,81 +26,43 @@ export default class HourlyChart extends React.Component {
 
 
     componentDidMount = () => {
+ 
+        const { hourly1, hourly2 } = this.props.hourlyData.hourlyData
+        const hourly = this.state.data ? hourly1 : hourly2;
+        if (hourly) {
+            var x = 60; //minutes interval
+            var times = []; // time array
+            var tt = 0; // start time
+            var ap = ['AM', 'PM']; // AM-PM
 
-        console.log(this.props);
+            //loop to increment the time and push results in array
+            for (var i = 0; tt < 24 * 60; i++) {
+                var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
+                var mm = (tt % 60); // getting minutes of the hour in 0-55 format
+                times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+                tt = tt + x;
+            }
 
-        let country = 'In';
-        let city = 'Delhi'
+            let dataset = [];
+            let set = [];
 
-        let lat = "28.541100";
-        let lon = "77.281677";
-
-        let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily&appid=429736441cf3572838aa10530929f7cd`;
-
-        var x = 60; //minutes interval
-        var times = []; // time array
-        var tt = 0; // start time
-        var ap = ['AM', 'PM']; // AM-PM
-
-        //loop to increment the time and push results in array
-        for (var i = 0; tt < 24 * 60; i++) {
-            var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
-            var mm = (tt % 60); // getting minutes of the hour in 0-55 format
-            times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
-            tt = tt + x;
-        }
-
-        // console.log(times);
-
-        fetch(y)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                const hourly = data.hourly
-                if (hourly) {
-                    var x = 60; //minutes interval
-                    var times = []; // time array
-                    var tt = 0; // start time
-                    var ap = ['AM', 'PM']; // AM-PM
-
-                    //loop to increment the time and push results in array
-                    for (var i = 0; tt < 24 * 60; i++) {
-                        var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
-                        var mm = (tt % 60); // getting minutes of the hour in 0-55 format
-                        times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
-                        tt = tt + x;
-                    }
-
-                    // console.log(times);
-
-                    let dataset = [];
-                    let set = [];
-
-                    hourly.forEach((hour, i) => {
-                        if (i < 24) {
-                            // let time = moment(hour.dt).format('h:mm a');
-                            const celsius = Math.round(hour.temp - 273.5);
-                            set.push(celsius);
-                        }
-                    });
-
-                    dataset[0] = { ...this.state.datasets[0], data: set }
-
-                    this.setState({ labels: times, datasets: dataset })
-
+            hourly.forEach((hour, i) => {
+                if (i < 24) {
+                    const celsius = Math.round(hour.temp - 273.5);
+                    set.push(celsius);
                 }
-            })
+            });
+            dataset[0] = { ...this.state.datasets[0], data: set }
+            this.setState({ labels: times, datasets: dataset, data: !this.state.data })
+        }
+        // })
     }
 
     render() {
 
-        // console.log(this.props);
+        const { todayWeather } = this.props;
 
-        const { todayWeather, hourlyData } = this.props;
-        console.log(todayWeather);
-        
-
-        const { pressure, humidity, temp, weather,sunrise,sunset } = todayWeather;
+        const { pressure, humidity, temp, weather, sunrise, sunset } = todayWeather;
 
         const temp1 = Math.round(temp.eve - 273.5);
         const image = weather[0].icon;
@@ -114,13 +77,7 @@ export default class HourlyChart extends React.Component {
                         />
                     </Typography>
                 </div>
-                {/* <GridList style={{
-                    flexWrap: 'nowrap',
-                    transform: 'translateZ(0)',
-                }}
-                     >
-                    <GridListTile style={{}}> */}
-
+         
                 <div style={{}} className='chart_container'>
                     <Line
                         data={this.state}
@@ -146,10 +103,7 @@ export default class HourlyChart extends React.Component {
                         }}
                     />
                 </div>
-
-                {/* </GridListTile> */}
-
-                {/* // </GridList> */}
+ 
                 <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
                     <Paper variant="outlined"
                         style={{ padding: '20px', backgroundColor: "#b8ffef" }}>
@@ -178,7 +132,7 @@ export default class HourlyChart extends React.Component {
                         <Typography variant='h5'>
                             Sunrise
                         <Typography variant='h6'>
-                                { moment(sunrise).format('hh:mm a')}
+                                {moment(sunrise).format('hh:mm a')}
                             </Typography>
                         </Typography>
                     </Paper>
@@ -189,8 +143,7 @@ export default class HourlyChart extends React.Component {
                             Sunset
                             </Typography>
                         <Typography variant='h6'>
-                        { moment(sunrise).format('hh:mm a')}
-
+                            {moment(sunset).format('hh:mm a')}
                         </Typography>
                     </Paper>
                 </Typography>

@@ -17,7 +17,6 @@ const LocationContextProvider = (props) => {
       .then(res => res.json()).then(data => {
         const { city, country, lat, lon } = data;
         setLocation({ position: { city, country, lat, lon } })
-        // console.log(data);
       }).catch(err => {
         console.log(err);
       })
