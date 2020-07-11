@@ -4,18 +4,15 @@ export const LocationContext = createContext();
 
 const LocationContextProvider = (props) => {
 
-  const [location, setLocation] = useState({
-    currentLocation: ""
-  });
+  const [location, setLocation] = useState("");
 
   const setCurrentLocation = (location) => {
     console.log(location);
-    setLocation({ location })
+    setLocation({ position: location })
   };
 
   useEffect(() => {
-    // console.log("==========================");
-    
+
     fetch('http://ip-api.com/json')
       .then(res => res.json()).then(data => {
         const { city, country, lat, lon } = data;

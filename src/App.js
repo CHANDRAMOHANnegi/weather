@@ -9,6 +9,7 @@ import "weather-icons/css/weather-icons.css";
 import Home from "./app_component/Home";
 import WeekContainer from "./container/weekContainer";
 import LocationContextProvider from "./_context/locationContext";
+import CurrentWeatherContextProvider, { CurrentWeatherContext } from "./_context/currentWeatherContext";
 
 const Api_Key = "429736441cf3572838aa10530929f7cd";
 // 6c56f74aff6349f9e141d96758e59f8b
@@ -113,19 +114,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Form loadweather={this.getWeather} error={this.state.error} />
+        {/* <Form loadweather={this.getWeather} error={this.state.error} /> */}
 
         <LocationContextProvider>
-          <Home />
+          <CurrentWeatherContextProvider>
+            <Home />
+          </CurrentWeatherContextProvider>
         </LocationContextProvider>
-        <Weather
+        {/* <Weather
           cityname={this.state.city}
           weatherIcon={this.state.icon}
           temp_celsius={this.state.celsius}
           temp_max={this.state.temp_max}
           temp_min={this.state.temp_min}
           description={this.state.description}
-        />
+        /> */}
       </div>
     );
   }
