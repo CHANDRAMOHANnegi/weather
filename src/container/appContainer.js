@@ -20,10 +20,10 @@ class WeekContainer extends React.Component {
                         if (currentWeather) {
                             const dailyData = currentWeather.dailyData
                             return (<div>
-                                <div className="row justify-content-center">
+                                <div style={{}} >
                                     {dailyData && <DayCard />}
                                 </div>
-                                <HourlyChart todayWeather={context.selectedDayWeather} />
+                                <HourlyChart todayWeather={context.selectedDayWeather}  hourlyData={currentWeather}/>
                             </div>)
                         }
                         else {

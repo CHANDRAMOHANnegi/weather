@@ -44,25 +44,27 @@ const CurrentWeatherContextProvider = (props) => {
 
             let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=429736441cf3572838aa10530929f7cd`
 
-            const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=429736441cf3572838aa10530929f7cd`
+            // const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=429736441cf3572838aa10530929f7cd`
 
-            fetch(weatherURL)
+            fetch(y)
                 .then(res => res.json())
                 .then(data => {
 
                     console.log(data);
-                    
 
-                    const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
+
+                    const dailyData = data.daily;//.filter(reading => reading.dt_txt.includes("18:00:00"))
                     // console.log("===================", dailyData);
 
 
                     setSelectedDayWeather(dailyData[0])
 
                     console.log("======----------------");
+                    let hourly1 = data.hourly;
 
+                    let hourly2 = hourly1.splice(24);
                     setCurrentWeather({
-                        fullData: data.list,
+                        hourlyData: { hourly1, hourly2 },
                         dailyData: dailyData
                     })
 

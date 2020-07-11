@@ -34,7 +34,7 @@ export default class HourlyChart extends React.Component {
         let lat = "28.541100";
         let lon = "77.281677";
 
-        let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&timezone_offset=4444455&exclude=daily&appid=429736441cf3572838aa10530929f7cd`;
+        let y = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily&appid=429736441cf3572838aa10530929f7cd`;
 
         var x = 60; //minutes interval
         var times = []; // time array
@@ -95,17 +95,17 @@ export default class HourlyChart extends React.Component {
 
         console.log(this.props);
 
+        const {todayWeather } = this.props;
 
-        const { main, weather } = this.props.todayWeather;
-        console.log(main);
+        const { pressure, humidity,temp,weather } = todayWeather;
 
-        const temp = Math.round(main.temp - 273.5);
+         const temp1= Math.round(temp.eve - 273.5);
         const image = weather[0].icon;
 
         return (
-            <Paper style={{ marginTop: "10px" }} elevation={3} >
+            <Paper style={{ marginTop: "40px" }} elevation={3} >
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `space-around` }}>
-                    <Typography variant={"h3"}>{temp + "°"}</Typography>
+                    <Typography variant={"h3"}>{temp1 + "°"}</Typography>
                     <Typography>
                         <img src={require(`../assets/${image}.png`)} alt="..."
                             style={{ maxHeight: '60px' }}
@@ -141,7 +141,7 @@ export default class HourlyChart extends React.Component {
                         <Typography variant='h5'>
                             Pressure
                         <Typography variant='h6'>
-                                {main.pressure + " hpa"}
+                                {pressure + " hpa"}
                             </Typography>
                         </Typography>
                     </Paper>
@@ -152,7 +152,7 @@ export default class HourlyChart extends React.Component {
                             Humidity
                             </Typography>
                         <Typography variant='h6'>
-                            {main.humidity + " %"}
+                            {humidity + " %"}
                         </Typography>
                     </Paper>
                 </Typography>
