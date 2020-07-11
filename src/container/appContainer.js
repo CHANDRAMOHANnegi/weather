@@ -2,7 +2,7 @@ import React from 'react';
 import DayCard from '../app_component/weekweather/DayCard';
 import HourlyChart from '../app_component/HourlyChart';
 import { CurrentWeatherContext } from '../_context/currentWeatherContext';
-import { CircularProgress, Paper } from '@material-ui/core';
+import { CircularProgress, Paper, Typography } from '@material-ui/core';
 
 class WeekContainer extends React.Component {
     state = {
@@ -57,19 +57,8 @@ class WeekContainer extends React.Component {
                                 <div className="row justify-content-center">
                                     {dailyData && <DayCard />}
                                 </div>
-                                <div >
-
-                                    <Paper>
-
-
-
-                                    </Paper>
-
-
-                                </div>
-
-
-                                <HourlyChart />
+                              
+                                <HourlyChart  todayWeather={context.selectedDayWeather} />
                             </div>)
                         }
                         else {

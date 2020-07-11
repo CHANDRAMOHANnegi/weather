@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // git project https://github.com/erikflowers/weather-icons
 import "weather-icons/css/weather-icons.css";
 import Home from "./app_component/Home";
-import WeekContainer from "./container/weekContainer";
+import AppContainer from "./container/appContainer";
 import LocationContextProvider from "./_context/locationContext";
 import CurrentWeatherContextProvider, { CurrentWeatherContext } from "./_context/currentWeatherContext";
 

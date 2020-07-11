@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 
-class WeatherCard extends Component {
-
-     
-
-
+class SunriseSunsetChart extends Component {
     render() {
         return (
             <div>
                 
-
-
-
             </div>
         );
     }
 }
 
-export default WeatherCard;
+export default SunriseSunsetChart;

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchButton from './SeachButton';
-import WeekContainer from '../container/weekContainer';
+import AppContainer from '../container/appContainer';
 import { LocationContext } from '../_context/locationContext';
 import { CircularProgress, Typography } from '@material-ui/core';
 
@@ -80,13 +80,8 @@ class Home extends React.Component {
                         <div className="App">
                             {!position ? <CircularProgress /> : (
                                 <SearchButton position={position} setCurrentLocation={context.setCurrentLocation} />)}
-                            <WeekContainer position={position} />
-                            <Typography>
-
-
-
-                            </Typography>
-                         </div>)
+                            <AppContainer position={position} />
+                        </div>)
                 }}
             </LocationContext.Consumer>
         )

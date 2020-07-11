@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 import moment from "moment";
+import { Paper, Typography, Grid } from '@material-ui/core';
 
 export default class HourlyChart extends React.Component {
 
@@ -91,8 +92,26 @@ export default class HourlyChart extends React.Component {
     }
 
     render() {
+
+        console.log(this.props);
+
+
+        const { main, weather } = this.props.todayWeather;
+        console.log(main);
+
+        const temp = Math.round(main.temp - 273.5);
+        const image = weather[0].icon;
+
         return (
-            <div>
+            <Paper style={{ marginTop: "10px" }} elevation={3} >
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `space-around` }}>
+                    <Typography variant={"h3"}>{temp + "°"}</Typography>
+                    <Typography>
+                        <img src={require(`../assets/${image}.png`)} alt="..."
+                            style={{ maxHeight: '60px' }}
+                        />
+                    </Typography>
+                </div>
                 <Line
                     data={this.state}
                     options={{
@@ -105,7 +124,7 @@ export default class HourlyChart extends React.Component {
                             display: true,
                             position: 'right'
                         }
-                        ,scales:{
+                        , scales: {
                             yAxes: [{
                                 ticks: {
                                     suggestedMin: 0,
@@ -115,7 +134,31 @@ export default class HourlyChart extends React.Component {
                         }
                     }}
                 />
-            </div>
+
+                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around',marginTop:'15px',textAlign:'left' }}>
+                    <Paper variant="outlined"
+                        style={{ padding: '20px',backgroundColor:"#b8ffef" }}
+                    >
+                        <Typography variant='h5'>
+                            Pressure
+                        <Typography variant='h6'>
+                                {main.pressure +" hpa"}
+                            </Typography>
+                        </Typography>
+                    </Paper>
+                    <Paper variant="outlined" square
+                        style={{ padding: '20px',backgroundColor:'#b8ffef' }}
+                    >
+                        <Typography variant='h5'>
+                            Humidity
+                            </Typography>
+                        <Typography variant='h6'>
+                            {main.humidity+ " %"}
+                        </Typography>
+                    </Paper>
+                </Typography>
+
+            </Paper>
         );
     }
 }
