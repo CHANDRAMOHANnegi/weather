@@ -5,6 +5,9 @@ import Card from '@material-ui/core/Card';
 // import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+// import Icons from '../../util/Images';
+import img from '../../assets/10n.png';
+import { Grid } from '@material-ui/core';
 var moment = require('moment');
 
 
@@ -18,7 +21,7 @@ const DayCard = ({ reading, degreeType }) => {
   //     {/* <p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p> */}
 
 
-  
+
   const Cards = dailyData.map(reading => {
 
     let newDate = new Date();
@@ -33,35 +36,45 @@ const DayCard = ({ reading, degreeType }) => {
 
     // console.log('======================================================');
     return (
-      <div className="card">
-        <Card style={{ minWidth: 275 }}>
-          <CardContent>
-            <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
-              <h3 className="card-title">{moment(newDate).format('dddd')}</h3>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              <div><span>{maxCelsius + "°"}</span> <span>{minCelsius + "°"}</span></div>
-            </Typography>
-            <Typography style={{ marginBottom: 12, }} color="textSecondary">
-              adjective
-        </Typography>
-            <Typography variant="body2" component="p">
-              {reading.weather[0].description}
-            </Typography>
-          </CardContent>
-        </Card>
-        <i className={imgURL}></i>
-      </div>)
+      <Card style={{}}>
+        <CardContent>
+          <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
+            <h3 className="card-title">{moment(newDate).format('dddd')}</h3>
+          </Typography>
+          <Typography variant="h5" component="h2">
+            <div><span>{maxCelsius + "°"}</span> <span>{minCelsius + "°"}</span></div>
+          </Typography>
+          <Typography style={{ marginBottom: 12, }} color="textSecondary">
+            <img src={require(`../../assets/${reading.weather[0].icon}.png`)} alt="..."
+              style={{ maxHeight: '100px' }}
+            />
+          </Typography>
+          <Typography variant="body2" component="p">
+            {reading.weather[0].description}
+          </Typography>
+        </CardContent>
+      </Card>
+
+    )
   })
 
 
   return (
 
-    <div className="col-sm-2">
-      hello
+    <div
+      style={{ display: 'flex', flexDirection: 'row',
+      justifyContent:'center'
+
+    }}
+    >
+      {/* <Grid container spacing={3}
+      >
+        <Grid item 
+        style={{display:'flex',flexDirection:'row'}}> */}
       {Cards}
+      {/* </Grid>
+      </Grid> */}
     </div>
-    // return<CircularProgress size={50} />
 
   )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import SearchButton from './SeachButton';
 import WeekContainer from '../container/weekContainer';
 import { LocationContext } from '../_context/locationContext';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 
 // API key of the google map
 const GOOGLE_MAP_API_KEY = 'AIzaSyCp8Z7yuvwUud3KyBdUkQsq8M3ysD9eXxQ';
@@ -81,8 +81,12 @@ class Home extends React.Component {
                             {!position ? <CircularProgress /> : (
                                 <SearchButton position={position} setCurrentLocation={context.setCurrentLocation} />)}
                             <WeekContainer position={position} />
-                            {/* <HourlyChart /> */}
-                        </div>)
+                            <Typography>
+
+
+
+                            </Typography>
+                         </div>)
                 }}
             </LocationContext.Consumer>
         )
