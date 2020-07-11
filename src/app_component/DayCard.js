@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { CurrentWeatherContext } from '../../_context/currentWeatherContext';
+import { CurrentWeatherContext } from '../_context/currentWeatherContext';
 import { useContext } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import img from '../../assets/10n.png';
+// import img from '../../assets/10n.png';
 import { GridList, GridListTile } from '@material-ui/core';
 var moment = require('moment');
 
@@ -59,7 +59,7 @@ const DayCard = ({ reading, degreeType }) => {
               <div><span>{maxCelsius + "°"}</span> <span>{minCelsius + "°"}</span></div>
             </Typography>
             <Typography style={{ marginBottom: 12, }} color="textSecondary">
-              <img src={require(`../../assets/${reading.weather[0].icon}.png`)} alt="..."
+              <img src={require(`../assets/${reading.weather[0].icon}.png`)} alt="..."
                 style={{ maxHeight: '80px' }}
               />
             </Typography>

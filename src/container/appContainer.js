@@ -1,5 +1,5 @@
 import React from 'react';
-import DayCard from '../app_component/weekweather/DayCard';
+import DayCard from '../app_component/DayCard';
 import HourlyChart from '../app_component/HourlyChart';
 import { CurrentWeatherContext } from '../_context/currentWeatherContext';
 import { CircularProgress } from '@material-ui/core';

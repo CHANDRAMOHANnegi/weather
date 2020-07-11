@@ -4,7 +4,7 @@ import AppContainer from '../container/appContainer';
 import { LocationContext } from '../_context/locationContext';
 import { CircularProgress } from '@material-ui/core';
 
- 
+
 class Home extends React.Component {
 
     state = {
@@ -14,8 +14,6 @@ class Home extends React.Component {
 
 
     render() {
-
-
         return (
             <LocationContext.Consumer>{
                 (context) => {
@@ -34,6 +32,4 @@ class Home extends React.Component {
 }
 
 export default Home;
-
-  // AIzaSyCp8Z7yuvwUud3KyBdUkQsq8M3ysD9eXxQ
-    // apiKey: 'AIzaSyCp8Z7yuvwUud3KyBdUkQsq8M3ysD9eXxQ'
+ 

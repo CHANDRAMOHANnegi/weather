@@ -36,7 +36,6 @@
 
 
 .chart_container{
-
   display: flex;
   flex-wrap: nowrap; 
   overflow: auto;
