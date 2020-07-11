@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import Form from "./app_component/form.component";
-import Weather from "./app_component/weather.component";
+// import Form from "./app_component/form.component";
+// import Weather from "./app_component/weather.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // git project https://github.com/erikflowers/weather-icons
 import "weather-icons/css/weather-icons.css";
 import Home from "./app_component/Home";
-import AppContainer from "./container/appContainer";
+// import AppContainer from "./container/appContainer";
 import LocationContextProvider from "./_context/locationContext";
 import CurrentWeatherContextProvider, { CurrentWeatherContext } from "./_context/currentWeatherContext";
 
