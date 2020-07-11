@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Typography variant='h4'>Weather App</Typography>
+        <Typography variant='h4'>Weather App        <a href="https://github.com/CHANDRAMOHANnegi" target="_blank"><img  src="./assets/github.png" alt="githublink"/></a></Typography>
         <LocationContextProvider>
           <CurrentWeatherContextProvider>
             <Home />

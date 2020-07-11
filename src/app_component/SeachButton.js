@@ -50,11 +50,9 @@ const SearchButton = (props) => {
           onChange={e => setValue(e.target.value)}
           value={value}
           inputRef={placeInputRef}
-          startAdornment={
-            <InputAdornment position="start">
-              <LocationOnIcon />
-            </InputAdornment>
-          }
+          InputProps={{
+            endAdornment: <LocationOnIcon />
+          }}
         />
       </FormControl>
     </React.Fragment>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 import moment from "moment";
-import { Paper, Typography, Grid, GridListTile, GridList } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 
 export default class HourlyChart extends React.Component {
 
@@ -26,7 +26,7 @@ export default class HourlyChart extends React.Component {
 
 
     componentDidMount = () => {
- 
+
         const { hourly1, hourly2 } = this.props.hourlyData.hourlyData
         const hourly = this.state.data ? hourly1 : hourly2;
         if (hourly) {
@@ -77,7 +77,7 @@ export default class HourlyChart extends React.Component {
                         />
                     </Typography>
                 </div>
-         
+
                 <div style={{}} className='chart_container'>
                     <Line
                         data={this.state}
@@ -103,7 +103,7 @@ export default class HourlyChart extends React.Component {
                         }}
                     />
                 </div>
- 
+
                 <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
                     <Paper variant="outlined"
                         style={{ padding: '20px', backgroundColor: "#b8ffef" }}>
@@ -129,21 +129,23 @@ export default class HourlyChart extends React.Component {
                 <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
                     <Paper variant="outlined"
                         style={{ padding: '20px', }}>
+                        <img src={require("../assets/mountain_sunrise.png")} alt="..." style={{ width: '50px' }} />
+
                         <Typography variant='h5'>
                             Sunrise
-                        <Typography variant='h6'>
-                                {moment(sunrise).format('hh:mm a')}
-                            </Typography>
                         </Typography>
+
+                        <Typography variant='h6'>
+                            {moment(sunrise).format('hh:mm a')}
+                        </Typography>
+
                     </Paper>
                     <Paper variant="outlined" square
                         style={{ padding: '20px' }}
                     >
+                        <img src={require("../assets/sunset.png")} alt="..." style={{ width: '50px' }} />
+
                         <Typography variant='h5'>
-
-
-
-
                             Sunset
                             </Typography>
                         <Typography variant='h6'>

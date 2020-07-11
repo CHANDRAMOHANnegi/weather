@@ -4,8 +4,7 @@ import { useContext } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-// import img from '../../assets/10n.png';
-import { GridList, GridListTile } from '@material-ui/core';
+ import { GridList, GridListTile } from '@material-ui/core';
 var moment = require('moment');
 
 const DayCard = ({ reading, degreeType }) => {
@@ -39,7 +38,7 @@ const DayCard = ({ reading, degreeType }) => {
   useEffect(() => {
     updateSize();
     window.addEventListener('resize', updateSize);
-  });
+  }, [window.innerWidth]);
 
 
   const Cards = dailyData.map((reading, index) => {
