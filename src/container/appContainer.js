@@ -23,7 +23,8 @@ class WeekContainer extends React.Component {
                                 <div style={{}} >
                                     {dailyData && <DayCard />}
                                 </div>
-                                <HourlyChart todayWeather={context.selectedDayWeather}  hourlyData={currentWeather}/>
+                                
+                                <HourlyChart todayWeather={context.selectedDayWeather} hourlyData={currentWeather} />
                             </div>)
                         }
                         else {

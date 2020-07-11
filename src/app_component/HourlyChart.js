@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 import moment from "moment";
-import { Paper, Typography, Grid } from '@material-ui/core';
+import { Paper, Typography, Grid, GridListTile, GridList } from '@material-ui/core';
 
 export default class HourlyChart extends React.Component {
 
@@ -26,7 +26,7 @@ export default class HourlyChart extends React.Component {
 
     componentDidMount = () => {
 
-        // console.log(this.props);
+        console.log(this.props);
 
         let country = 'In';
         let city = 'Delhi'
@@ -93,13 +93,15 @@ export default class HourlyChart extends React.Component {
 
     render() {
 
-        console.log(this.props);
+        // console.log(this.props);
 
-        const {todayWeather } = this.props;
+        const { todayWeather, hourlyData } = this.props;
+        console.log(todayWeather);
+        
 
-        const { pressure, humidity,temp,weather } = todayWeather;
+        const { pressure, humidity, temp, weather,sunrise,sunset } = todayWeather;
 
-         const temp1= Math.round(temp.eve - 273.5);
+        const temp1 = Math.round(temp.eve - 273.5);
         const image = weather[0].icon;
 
         return (
@@ -112,30 +114,43 @@ export default class HourlyChart extends React.Component {
                         />
                     </Typography>
                 </div>
-                <Line
-                    data={this.state}
-                    options={{
-                        title: {
-                            display: true,
-                            text: 'Average Rainfall per month',
-                            fontSize: 20
-                        },
-                        legend: {
-                            display: true,
-                            position: 'right'
-                        }
-                        , scales: {
-                            yAxes: [{
-                                ticks: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 50
-                                }
-                            }]
-                        }
-                    }}
-                />
+                {/* <GridList style={{
+                    flexWrap: 'nowrap',
+                    transform: 'translateZ(0)',
+                }}
+                     >
+                    <GridListTile style={{}}> */}
 
-                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', textAlign: 'left' }}>
+                <div style={{}} className='chart_container'>
+                    <Line
+                        data={this.state}
+                        options={{
+                            title: {
+                                display: true,
+                                text: 'Average Rainfall per month',
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: true,
+                                position: 'right'
+                            }
+                            , scales: {
+                                yAxes: [{
+                                    display: false,
+                                    ticks: {
+                                        suggestedMin: 20,
+                                        suggestedMax: 45
+                                    }
+                                }]
+                            }
+                        }}
+                    />
+                </div>
+
+                {/* </GridListTile> */}
+
+                {/* // </GridList> */}
+                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
                     <Paper variant="outlined"
                         style={{ padding: '20px', backgroundColor: "#b8ffef" }}>
                         <Typography variant='h5'>
@@ -153,6 +168,29 @@ export default class HourlyChart extends React.Component {
                             </Typography>
                         <Typography variant='h6'>
                             {humidity + " %"}
+                        </Typography>
+                    </Paper>
+                </Typography>
+
+                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
+                    <Paper variant="outlined"
+                        style={{ padding: '20px', }}>
+                        <Typography variant='h5'>
+                            Sunrise
+                        <Typography variant='h6'>
+                                { moment(sunrise).format('hh:mm a')}
+                            </Typography>
+                        </Typography>
+                    </Paper>
+                    <Paper variant="outlined" square
+                        style={{ padding: '20px' }}
+                    >
+                        <Typography variant='h5'>
+                            Sunset
+                            </Typography>
+                        <Typography variant='h6'>
+                        { moment(sunrise).format('hh:mm a')}
+
                         </Typography>
                     </Paper>
                 </Typography>

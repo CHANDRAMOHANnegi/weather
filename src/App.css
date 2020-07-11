@@ -30,4 +30,20 @@
   to {
     transform: rotate(360deg);
   }
+
+  
+}
+
+
+.chart_container{
+
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+  transform: scale(.8);
+}
+
+.chart_container canvas{
+  height: 350px !important;
+  width:1000px !important;
 }
