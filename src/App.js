@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Typography variant='h4'>Weather App
-         <a href="https://github.com/CHANDRAMOHANnegi" target="_blank">
+         <a href="https://github.com/CHANDRAMOHANnegi/weather" target="_blank">
             <img style={{ height: '25px', width: '25px' ,marginLeft:'10px' }}
               src={require("./assets/github.png")} alt="github" />
           </a>
