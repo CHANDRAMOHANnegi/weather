@@ -15,12 +15,16 @@ const DayCard = ({ reading, degreeType }) => {
   const context = useContext(CurrentWeatherContext);
 
   const currentWeather = context.currentWeather;
-  // console.log(context);
+  const setselecteddayWeather = context.setselecteddayWeather;
+  console.log(context);
   const dailyData = currentWeather.dailyData;
 
   //     {/* <p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p> */}
 
+const handleClick=(reading)=>{
+  setselecteddayWeather(reading)
 
+}
 
   const Cards = dailyData.map(reading => {
 
@@ -36,7 +40,7 @@ const DayCard = ({ reading, degreeType }) => {
 
     // console.log('======================================================');
     return (
-      <Card style={{}}>
+      <Card style={{}} onClick={()=>handleClick(reading)}  >
         <CardContent>
           <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
             <h3 className="card-title">{moment(newDate).format('dddd')}</h3>

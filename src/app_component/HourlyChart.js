@@ -135,29 +135,27 @@ export default class HourlyChart extends React.Component {
                     }}
                 />
 
-                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around',marginTop:'15px',textAlign:'left' }}>
+                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', textAlign: 'left' }}>
                     <Paper variant="outlined"
-                        style={{ padding: '20px',backgroundColor:"#b8ffef" }}
-                    >
+                        style={{ padding: '20px', backgroundColor: "#b8ffef" }}>
                         <Typography variant='h5'>
                             Pressure
                         <Typography variant='h6'>
-                                {main.pressure +" hpa"}
+                                {main.pressure + " hpa"}
                             </Typography>
                         </Typography>
                     </Paper>
                     <Paper variant="outlined" square
-                        style={{ padding: '20px',backgroundColor:'#b8ffef' }}
+                        style={{ padding: '20px', backgroundColor: '#b8ffef' }}
                     >
                         <Typography variant='h5'>
                             Humidity
                             </Typography>
                         <Typography variant='h6'>
-                            {main.humidity+ " %"}
+                            {main.humidity + " %"}
                         </Typography>
                     </Paper>
                 </Typography>
-
             </Paper>
         );
     }
