@@ -20,13 +20,21 @@ class WeekContainer extends React.Component {
                         if (currentWeather) {
                             const dailyData = currentWeather.dailyData
                             const hourlyData = currentWeather.hourlyData
-                            return (<div>
-                                <div style={{}} >
-                                    {dailyData && <DayCard />}
-                                </div>
-                                
-                                <HourlyChart todayWeather={context.selectedDayWeather} hourlyData={currentWeather} />
-                            </div>)
+                            const setSelectedDayWeather = context.setSelectedDayWeather;
+
+                            return (
+                                <>
+                                    {
+                                        dailyData &&
+                                        <DayCard
+                                            dailyData={dailyData}
+                                            setSelectedDayWeather={setSelectedDayWeather}
+                                        />
+                                    }
+                                    <HourlyChart
+                                        todayWeather={context.selectedDayWeather}
+                                        hourlyData={hourlyData} />
+                                </>)
                         }
                         else {
                             return <CircularProgress size={50} />

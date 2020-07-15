@@ -1,45 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { CurrentWeatherContext } from '../_context/currentWeatherContext';
-import { useContext } from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
- import { GridList, GridListTile } from '@material-ui/core';
-var moment = require('moment');
 
-const DayCard = ({ reading, degreeType }) => {
-  const context = useContext(CurrentWeatherContext);
+import moment from 'moment';
 
-  const currentWeather = context.currentWeather;
-  const setselecteddayWeather = context.setselecteddayWeather;
-  const dailyData = currentWeather.dailyData;
-  const [cols, setCols] = useState(7);
+const DayCard = ({ dailyData, setSelectedDayWeather }) => {
 
-  const handleClick = (reading) => {
-    setselecteddayWeather(reading)
+  const handleClick = (reading, i) => {
+    setSelectedDayWeather(reading)
+    setactive(i)
   }
 
-  const updateSize = () => {
-
-    if (window.innerWidth < 400) {
-      setCols(2);
-    } else if (window.innerWidth < 750) {
-      setCols(3);
-    } else
-      if (window.innerWidth < 850) {
-        setCols(4);
-      } else
-        if (window.innerWidth < 1000) {
-          setCols(5);
-        }
-
-  }
-
-  useEffect(() => {
-    updateSize();
-    window.addEventListener('resize', updateSize);
-  }, [window.innerWidth]);
-
+  const [active, setactive] = useState(0);
 
   const Cards = dailyData.map((reading, index) => {
     let newDate = new Date();
@@ -48,8 +21,13 @@ const DayCard = ({ reading, degreeType }) => {
     const maxCelsius = Math.round(reading.temp.max - 273.5);
     const minCelsius = Math.round(reading.temp.min - 273.5);
     return (
-      <GridListTile key={index} style={{ height: '250px' }}>
-        <Card style={{ minWidth: '120px', margin: '5px 2px', display: 'inline-block' }} onClick={() => handleClick(reading)}   >
+      <div class="filter_dd8e1" tabindex="0" key={index}>
+        <Card style={{
+          minWidth: '120px', margin: '5px 2px',
+          border: active === index ? '1px solid #0f6fff' : '',
+          display: 'inline-block'
+        }}
+          onClick={() => handleClick(reading, index)}   >
           <CardContent>
             <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
               <h4 className="card-title">{moment(newDate).format('dddd')}</h4>
@@ -59,29 +37,22 @@ const DayCard = ({ reading, degreeType }) => {
             </Typography>
             <Typography style={{ marginBottom: 12, }} color="textSecondary">
               <img src={require(`../assets/${reading.weather[0].icon}.png`)} alt="..."
-                style={{ maxHeight: '80px' }}
-              />
+                style={{ maxHeight: '80px' }} />
             </Typography>
             <Typography variant="body2" component="p">
               {reading.weather[0].description}
             </Typography>
           </CardContent>
         </Card>
-      </GridListTile >
+      </div>
     )
   })
 
   return (
-    <div >
-      <GridList style={{
-        flexWrap: 'nowrap',
-        transform: 'translateZ(0)',
-      }}
-        cols={cols}
-        spacing={2} >
+    <div class="component_88892">
+      <div class="filters_670e9">
         {Cards}
-
-      </GridList>
+      </div>
     </div>
   )
 }

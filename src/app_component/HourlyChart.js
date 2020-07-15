@@ -6,11 +6,9 @@ import { Paper, Typography } from '@material-ui/core';
 
 export default class HourlyChart extends React.Component {
 
-
     state = {
         data: true,
-        labels: ['January', 'February', 'March',
-            'April', 'May'],
+        labels: ['January', 'February', 'March', 'April', 'May'],
         datasets: [
             {
                 label: 'Rainfall',
@@ -26,10 +24,8 @@ export default class HourlyChart extends React.Component {
 
 
     componentDidMount = () => {
-
-        const { hourly1, hourly2 } = this.props.hourlyData.hourlyData
-        const hourly = this.state.data ? hourly1 : hourly2;
-        if (hourly) {
+        const hourlyData = this.props.hourlyData
+        if (hourlyData) {
             var x = 60; //minutes interval
             var times = []; // time array
             var tt = 0; // start time
@@ -46,7 +42,7 @@ export default class HourlyChart extends React.Component {
             let dataset = [];
             let set = [];
 
-            hourly.forEach((hour, i) => {
+            hourlyData.forEach((hour, i) => {
                 if (i < 24) {
                     const celsius = Math.round(hour.temp - 273.5);
                     set.push(celsius);
@@ -55,19 +51,20 @@ export default class HourlyChart extends React.Component {
             dataset[0] = { ...this.state.datasets[0], data: set }
             this.setState({ labels: times, datasets: dataset, data: !this.state.data })
         }
-        // })
     }
 
-    render() {
 
+    render() {
         const { todayWeather } = this.props;
 
+        // console.log(todayWeather);
         const { pressure, humidity, temp, weather, sunrise, sunset } = todayWeather;
 
         const temp1 = Math.round(temp.eve - 273.5);
         const image = weather[0].icon;
 
         return (
+
             <Paper style={{ marginTop: "40px" }} elevation={3} >
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `space-around` }}>
                     <Typography variant={"h3"}>{temp1 + "°"}</Typography>
@@ -79,29 +76,35 @@ export default class HourlyChart extends React.Component {
                 </div>
 
                 <div style={{}} className='chart_container'>
-                    <Line
-                        data={this.state}
-                        options={{
-                            title: {
-                                display: true,
-                                text: 'Average Rainfall per month',
-                                fontSize: 20
-                            },
-                            legend: {
-                                display: true,
-                                position: 'right'
-                            }
-                            , scales: {
-                                yAxes: [{
-                                    display: false,
-                                    ticks: {
-                                        suggestedMin: 20,
-                                        suggestedMax: 45
-                                    }
-                                }]
-                            }
-                        }}
-                    />
+                    <div class="component_88892">
+                        <div class="filters_670e9">
+                            <div className='filter_dd8e1'>
+                                <Line
+                                    data={this.state}
+                                    options={{
+                                        title: {
+                                            display: true,
+                                            text: 'Average Rainfall per month',
+                                            fontSize: 20
+                                        },
+                                        legend: {
+                                            display: true,
+                                            position: 'right'
+                                        }
+                                        , scales: {
+                                            yAxes: [{
+                                                display: false,
+                                                ticks: {
+                                                    suggestedMin: 20,
+                                                    suggestedMax: 45
+                                                }
+                                            }]
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
@@ -115,8 +118,7 @@ export default class HourlyChart extends React.Component {
                         </Typography>
                     </Paper>
                     <Paper variant="outlined" square
-                        style={{ padding: '20px', backgroundColor: '#b8ffef' }}
-                    >
+                        style={{ padding: '20px', backgroundColor: '#b8ffef' }}>
                         <Typography variant='h5'>
                             Humidity
                             </Typography>
@@ -126,34 +128,39 @@ export default class HourlyChart extends React.Component {
                     </Paper>
                 </Typography>
 
-                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
+                <Typography style={{
+                    display: 'flex', flexDirection: 'row',
+                    justifyContent: 'space-between', marginTop: '15px',
+                    marginBottom: '15px', textAlign: 'left'
+                }}>
                     <Paper variant="outlined"
                         style={{ padding: '20px', }}>
-                        <img src={require("../assets/mountain_sunrise.png")} alt="..." style={{ width: '50px' }} />
+                        <img src={require("../assets/mountain_sunrise.png")}
+                            alt="..." style={{ width: '50px' }} />
 
                         <Typography variant='h5'>
                             Sunrise
                         </Typography>
 
                         <Typography variant='h6'>
-                            {moment(sunrise).format('hh:mm a')}
+                            {moment.unix(sunrise).format('hh:mm a')}
                         </Typography>
-
                     </Paper>
-                    <Paper variant="outlined" square
-                        style={{ padding: '20px' }}
-                    >
-                        <img src={require("../assets/sunset.png")} alt="..." style={{ width: '50px' }} />
 
+                    <Paper variant="outlined" square
+                        style={{ padding: '20px' }}>
+                        <img src={require("../assets/sunset.png")} alt="..." style={{ width: '50px' }} />
                         <Typography variant='h5'>
                             Sunset
                             </Typography>
                         <Typography variant='h6'>
-                            {moment(sunset).format('hh:mm a')}
+                            {moment.unix(sunset).format('hh:mm a')}
                         </Typography>
                     </Paper>
                 </Typography>
             </Paper>
+
+
         );
     }
 }
