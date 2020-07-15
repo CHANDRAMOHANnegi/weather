@@ -22,17 +22,7 @@
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-
-  
-}
+ 
 
 /* 
 .chart_container{
@@ -52,7 +42,7 @@
 
 .component_88892 {
   background-color: #fff;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
 }
 
 .filters_670e9 {
@@ -61,7 +51,8 @@
   align-items: flex-start;
   /* min-width: 0;
   min-height: 0; */
-  overflow: auto; 
+  overflow: auto;   scrollbar-width: none;
+
 }
 
 .filter_dd8e1 {

@@ -7,7 +7,7 @@ import { Paper, Typography } from '@material-ui/core';
 export default class HourlyChart extends React.Component {
 
     state = {
-        data: true,
+        
         labels: ['January', 'February', 'March', 'April', 'May'],
         datasets: [
             {
@@ -34,8 +34,7 @@ export default class HourlyChart extends React.Component {
             //loop to increment the time and push results in array
             for (var i = 0; tt < 24 * 60; i++) {
                 var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
-                var mm = (tt % 60); // getting minutes of the hour in 0-55 format
-                times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+                times[i] = ((hh % 12)) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
                 tt = tt + x;
             }
 
@@ -49,7 +48,7 @@ export default class HourlyChart extends React.Component {
                 }
             });
             dataset[0] = { ...this.state.datasets[0], data: set }
-            this.setState({ labels: times, datasets: dataset, data: !this.state.data })
+            this.setState({ labels: times, datasets: dataset })
         }
     }
 
@@ -65,13 +64,12 @@ export default class HourlyChart extends React.Component {
 
         return (
 
-            <Paper style={{ marginTop: "40px" }} elevation={3} >
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `space-around` }}>
-                    <Typography variant={"h3"}>{temp1 + "°"}</Typography>
-                    <Typography>
+            <Paper style={{ marginTop: "20px", padding: '15px', borderRadius: '10px' }} elevation={1} >
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `start`, paddingTop: '10px' }}>
+                    <Typography variant={"h3"} style={{ fontWeight: '700' }}>{temp1 + "°C"}</Typography>
+                    <Typography style={{ marginLeft: '40px' }}>
                         <img src={require(`../assets/${image}.png`)} alt="..."
-                            style={{ maxHeight: '60px' }}
-                        />
+                            style={{ maxHeight: '60px' }} />
                     </Typography>
                 </div>
 
@@ -90,8 +88,7 @@ export default class HourlyChart extends React.Component {
                                         legend: {
                                             display: true,
                                             position: 'right'
-                                        }
-                                        , scales: {
+                                        }, scales: {
                                             yAxes: [{
                                                 display: false,
                                                 ticks: {
@@ -107,22 +104,26 @@ export default class HourlyChart extends React.Component {
                     </div>
                 </div>
 
-                <Typography style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left' }}>
+                <Typography
+                    style={{
+                        display: 'flex', flexDirection: 'row',
+                        justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left'
+                    }}>
                     <Paper variant="outlined"
-                        style={{ padding: '20px', backgroundColor: "#b8ffef" }}>
-                        <Typography variant='h5'>
+                        style={{ padding: '10px', backgroundColor: "rgb(239, 255, 251)", width: '30%' }} >
+                        <Typography  >
                             Pressure
-                        <Typography variant='h6'>
+                        <Typography  >
                                 {pressure + " hpa"}
                             </Typography>
                         </Typography>
                     </Paper>
                     <Paper variant="outlined" square
-                        style={{ padding: '20px', backgroundColor: '#b8ffef' }}>
-                        <Typography variant='h5'>
+                        style={{ padding: '10px', backgroundColor: 'rgb(239, 255, 251)', width: '30%' }}>
+                        <Typography  >
                             Humidity
                             </Typography>
-                        <Typography variant='h6'>
+                        <Typography >
                             {humidity + " %"}
                         </Typography>
                     </Paper>

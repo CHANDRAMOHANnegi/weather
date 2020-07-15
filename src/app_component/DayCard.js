@@ -8,16 +8,16 @@ import moment from 'moment';
 const DayCard = ({ dailyData, setSelectedDayWeather }) => {
 
   const handleClick = (reading, i) => {
-    setSelectedDayWeather(reading)
-    setactive(i)
+    setSelectedDayWeather(reading);
+    setactive(i);
   }
 
   const [active, setactive] = useState(0);
 
   const Cards = dailyData.map((reading, index) => {
     let newDate = new Date();
-    const weekday = reading.dt * 1000
-    newDate.setTime(weekday)
+    const weekday = reading.dt * 1000;
+    newDate.setTime(weekday);
     const maxCelsius = Math.round(reading.temp.max - 273.5);
     const minCelsius = Math.round(reading.temp.min - 273.5);
     return (
@@ -27,7 +27,7 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
           border: active === index ? '1px solid #0f6fff' : '',
           display: 'inline-block'
         }}
-          onClick={() => handleClick(reading, index)}   >
+          onClick={() => handleClick(reading, index)}  >
           <CardContent>
             <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
               <h4 className="card-title">{moment(newDate).format('dddd')}</h4>
