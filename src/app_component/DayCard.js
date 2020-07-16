@@ -23,7 +23,8 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
     return (
       <div class="filter_dd8e1" tabindex="0" key={index}>
         <Card style={{
-          minWidth: '120px', margin: '5px 2px',
+          // minWidth: '120px', 
+          margin: '5px 2px',
           border: active === index ? '1px solid #0f6fff' : '',
           display: 'inline-block'
         }}

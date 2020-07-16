@@ -7,11 +7,11 @@ import { Paper, Typography } from '@material-ui/core';
 export default class HourlyChart extends React.Component {
 
     state = {
-        
+
         labels: ['January', 'February', 'March', 'April', 'May'],
         datasets: [
             {
-                label: 'Rainfall',
+
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: 'rgba(75,192,192,1)',
@@ -82,12 +82,11 @@ export default class HourlyChart extends React.Component {
                                     options={{
                                         title: {
                                             display: true,
-                                            text: 'Average Rainfall per month',
                                             fontSize: 20
                                         },
+                                        maintainAspectRatio: true,
                                         legend: {
-                                            display: true,
-                                            position: 'right'
+                                            display: false,
                                         }, scales: {
                                             yAxes: [{
                                                 display: false,
@@ -96,6 +95,9 @@ export default class HourlyChart extends React.Component {
                                                     suggestedMax: 45
                                                 }
                                             }]
+                                            ,gridLines:{
+                                                color:"blue"
+                                            }
                                         }
                                     }}
                                 />
