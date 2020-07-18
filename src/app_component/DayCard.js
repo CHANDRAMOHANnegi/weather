@@ -20,6 +20,11 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
     newDate.setTime(weekday);
     const maxCelsius = Math.round(reading.temp.max - 273.5);
     const minCelsius = Math.round(reading.temp.min - 273.5);
+
+    const imgURL = `owf owf-${reading.weather[0].id} owf-5x`
+
+    console.log(imgURL);
+
     return (
       <div class="filter_dd8e1" tabindex="0" key={index}>
         <Card style={{
@@ -37,7 +42,7 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
               <div><span>{maxCelsius + "°"}</span> <span>{minCelsius + "°"}</span></div>
             </Typography>
             <Typography style={{ marginBottom: 12, }} color="textSecondary">
-              <img src={require(`../assets/${reading.weather[0].icon}.png`)} alt="..."
+              <i className={imgURL} alt="..."
                 style={{ maxHeight: '80px' }} />
             </Typography>
             <Typography variant="body2" component="p">

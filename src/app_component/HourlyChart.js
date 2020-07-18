@@ -61,6 +61,7 @@ export default class HourlyChart extends React.Component {
 
         const temp1 = Math.round(temp.eve - 273.5);
         const image = weather[0].icon;
+        const imgURL = `owf owf-${ weather[0].id} owf-5x`
 
         return (
 
@@ -68,8 +69,8 @@ export default class HourlyChart extends React.Component {
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `start`, paddingTop: '10px' }}>
                     <Typography variant={"h3"} style={{ fontWeight: '700' }}>{temp1 + "°C"}</Typography>
                     <Typography style={{ marginLeft: '40px' }}>
-                        <img src={require(`../assets/${image}.png`)} alt="..."
-                            style={{ maxHeight: '60px' }} />
+                        <i className={imgURL} alt="..."
+                            style={{ maxHeight: '60px'  }} />
                     </Typography>
                 </div>
 
