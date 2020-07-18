@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 import moment from "moment";
 import { Paper, Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 export default class HourlyChart extends React.Component {
 
@@ -61,19 +62,19 @@ export default class HourlyChart extends React.Component {
 
         return (
 
-            <Paper style={{ marginTop: "20px", padding: '15px', borderRadius: '10px' }} elevation={1} >
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: `start`, paddingTop: '10px' }}>
+            <Paper style={{ marginTop: "1px", padding: '15px', borderRadius: '10px' }} elevation={1} >
+                <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: `start`, paddingTop: '10px' }}>
                     <Typography variant={"h3"} style={{ fontWeight: '700' }}>{temp1 + "°C"}</Typography>
                     <Typography style={{ marginLeft: '40px' }}>
                         <i className={imgURL} alt="..."
                             style={{ maxHeight: '60px' }} />
                     </Typography>
-                </div>
+                </Box>
 
-                <div style={{}} className='chart_container'>
-                    <div class="component_88892">
-                        <div class="filters_670e9">
-                            <div className='filter_dd8e1'>
+                <Box className='chart_container'>
+                    <Box class="slider_component">
+                        <Box class="slider">
+                            <Box className='slider_children'>
                                 <Line
                                     data={this.state}
                                     options={{
@@ -84,7 +85,8 @@ export default class HourlyChart extends React.Component {
                                         maintainAspectRatio: true,
                                         legend: {
                                             display: false,
-                                        }, scales: {
+                                        },
+                                        scales: {
                                             yAxes: [{
                                                 display: false,
                                                 ticks: {
@@ -94,19 +96,19 @@ export default class HourlyChart extends React.Component {
                                             }]
                                             , gridLines: {
                                                 color: "blue"
-                                            }
-                                        }
+                                            },
+                                        },
                                     }}
                                 />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
 
                 <Typography
                     style={{
                         display: 'flex', flexDirection: 'row',
-                        justifyContent: 'space-around', marginTop: '15px', marginBottom: '15px', textAlign: 'left'
+                        justifyContent: 'space-around', marginTop: '1px', marginBottom: '15px', textAlign: 'left'
                     }}>
                     <Paper variant="outlined"
                         style={{ padding: '10px', backgroundColor: "rgb(239, 255, 251)", width: '30%' }} >
@@ -130,14 +132,13 @@ export default class HourlyChart extends React.Component {
 
                 <Typography style={{
                     display: 'flex', flexDirection: 'row',
-                    justifyContent: 'space-between', marginTop: '15px',
+                    justifyContent: 'space-between', marginTop: '1px',
                     marginBottom: '15px', textAlign: 'left'
                 }}>
                     <Paper variant="outlined"
-                        style={{ padding: '20px', }}>
+                        style={{ padding: '15px 20px', }}>
                         <img src={require("../assets/mountain_sunrise.png")}
                             alt="..." style={{ width: '50px' }} />
-
                         <Typography variant='h5'>
                             Sunrise
                         </Typography>
@@ -146,9 +147,8 @@ export default class HourlyChart extends React.Component {
                             {moment.unix(sunrise).format('hh:mm a')}
                         </Typography>
                     </Paper>
-
                     <Paper variant="outlined" square
-                        style={{ padding: '20px' }}>
+                        style={{ padding: '15px 20px' }}>
                         <img src={require("../assets/sunset.png")} alt="..." style={{ width: '50px' }} />
                         <Typography variant='h5'>
                             Sunset

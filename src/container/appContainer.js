@@ -3,6 +3,7 @@ import DayCard from '../app_component/DayCard';
 import HourlyChart from '../app_component/HourlyChart';
 import { CurrentWeatherContext } from '../_context/currentWeatherContext';
 import { CircularProgress } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import { LocationContext } from '../_context/locationContext';
 import SearchButton from '../app_component/SeachButton';
 
@@ -20,7 +21,7 @@ const AppContainer = () => {
                     const hourlyData = currentWeather.hourlyData
                     const setSelectedDayWeather = context.setSelectedDayWeather;
                     return (
-                        <div className="container">
+                        <Container>
                             {!position ?
                                 <CircularProgress /> :
                                 <SearchButton position={position}
@@ -32,7 +33,7 @@ const AppContainer = () => {
                             <HourlyChart
                                 todayWeather={context.selectedDayWeather}
                                 hourlyData={hourlyData} />
-                        </div>
+                        </Container>
                     )
                 } else {
                     return <CircularProgress size={50} />

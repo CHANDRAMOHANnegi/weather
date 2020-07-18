@@ -40,12 +40,12 @@
 
 
 
-.component_88892 {
+.slider_component {
   background-color: #fff;
   /* padding: 8px 16px; */
 }
 
-.filters_670e9 {
+.slider {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -55,7 +55,7 @@
 
 }
 
-.filter_dd8e1 {
+.slider_children {
   border-radius: 4px;
   display: flex;
   flex-direction: row;

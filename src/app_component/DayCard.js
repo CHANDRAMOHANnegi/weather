@@ -24,7 +24,7 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
     const imgURL = `owf owf-${reading.weather[0].id} owf-5x`
 
     return (
-      <div class="filter_dd8e1" tabindex="0" key={index}>
+      <div class="slider_children" tabindex="0" key={index}>
         <Card style={{
           margin: '5px 2px',
           border: active === index ? '1px solid #0f6fff' : '',
@@ -34,6 +34,7 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
           <CardContent>
             <Typography style={{ fontSize: 14 }} color="textSecondary" gutterBottom>
               <h4 className="card-title">{moment(newDate).format('dddd')}</h4>
+              <h6 className="card-title">{moment(newDate).format('DD/MM/Y')}</h6>
             </Typography>
             <Typography variant="h5" component="h2">
               <div><span>{maxCelsius + "°"}</span> <span>{minCelsius + "°"}</span></div>
@@ -52,8 +53,8 @@ const DayCard = ({ dailyData, setSelectedDayWeather }) => {
   })
 
   return (
-    <div class="component_88892">
-      <div class="filters_670e9">
+    <div class="slider_component">
+      <div class="slider">
         {Cards}
       </div>
     </div>
