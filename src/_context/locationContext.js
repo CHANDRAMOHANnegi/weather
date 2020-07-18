@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import Axios from 'axios';
 
 export const LocationContext = createContext();
 
@@ -7,18 +8,18 @@ const LocationContextProvider = (props) => {
   const [location, setLocation] = useState("");
 
   const setCurrentLocation = (location) => {
-    console.log(location);
     setLocation({ position: location })
   };
 
   useEffect(() => {
-
-    fetch('http://ip-api.com/json')
-      .then(res => res.json()).then(data => {
-        const { city, country, lat, lon } = data;
+    const url = 'http://ip-api.com/json';
+    Axios.get(url)
+      .then(function (res) {
+        const { city, country, lat, lon } = res.data;
         setLocation({ position: { city, country, lat, lon } })
-      }).catch(err => {
-        console.log(err);
+      })
+      .catch(function (error) {
+        console.log(error);
       })
   }, []);
 

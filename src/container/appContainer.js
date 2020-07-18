@@ -1,49 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import DayCard from '../app_component/DayCard';
 import HourlyChart from '../app_component/HourlyChart';
 import { CurrentWeatherContext } from '../_context/currentWeatherContext';
 import { CircularProgress } from '@material-ui/core';
+import { LocationContext } from '../_context/locationContext';
+import SearchButton from '../app_component/SeachButton';
 
-class WeekContainer extends React.Component {
-    state = {
-        fullData: [],
-        dailyData: []
-    }
+const AppContainer = () => {
 
-    render() {
-        return (
-            <div className="container">
-                <CurrentWeatherContext.Consumer>{
-                    (context) => {
-                        const currentWeather = context.currentWeather;
-                        console.log(context);
-                        if (currentWeather) {
-                            const dailyData = currentWeather.dailyData
-                            const hourlyData = currentWeather.hourlyData
-                            const setSelectedDayWeather = context.setSelectedDayWeather;
+    const locationContext = useContext(LocationContext);
+    const { position } = locationContext.location;
 
-                            return (
-                                <>
-                                    {
-                                        dailyData &&
-                                        <DayCard
-                                            dailyData={dailyData}
-                                            setSelectedDayWeather={setSelectedDayWeather}
-                                        />
-                                    }
-                                    <HourlyChart
-                                        todayWeather={context.selectedDayWeather}
-                                        hourlyData={hourlyData} />
-                                </>)
-                        }
-                        else {
-                            return <CircularProgress size={50} />
-                        }
-                    }}
-                </CurrentWeatherContext.Consumer>
-            </div>
-        )
-    }
+    return (
+        <CurrentWeatherContext.Consumer>{
+            (context) => {
+                const currentWeather = context.currentWeather;
+                if (currentWeather) {
+                    const dailyData = currentWeather.dailyData
+                    const hourlyData = currentWeather.hourlyData
+                    const setSelectedDayWeather = context.setSelectedDayWeather;
+                    return (
+                        <div className="container">
+                            {!position ?
+                                <CircularProgress /> :
+                                <SearchButton position={position}
+                                    setCurrentLocation={locationContext.setCurrentLocation} />}
+                            <DayCard
+                                dailyData={dailyData}
+                                setSelectedDayWeather={setSelectedDayWeather}
+                            />
+                            <HourlyChart
+                                todayWeather={context.selectedDayWeather}
+                                hourlyData={hourlyData} />
+                        </div>
+                    )
+                } else {
+                    return <CircularProgress size={50} />
+                }
+            }}
+        </CurrentWeatherContext.Consumer>
+    )
 }
 
-export default WeekContainer;
+export default AppContainer;

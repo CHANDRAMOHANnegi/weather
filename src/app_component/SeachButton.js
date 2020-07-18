@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import { TextField } from "@material-ui/core";
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -16,9 +15,8 @@ const SearchButton = (props) => {
     setValue(v)
     initPlaceAPI();
 
-  }, [props]);
+  }, []);
 
-  // initialize the google place autocomplete
   const initPlaceAPI = () => {
 
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current);
@@ -26,10 +24,8 @@ const SearchButton = (props) => {
       let place = autocomplete.getPlace();
 
       const places = place.formatted_address.split(',');
-
       const city = places[0];
       const country = places[places.length - 1];
-
       const position = {
         lat: place.geometry.location.lat(),
         lon: place.geometry.location.lng(),

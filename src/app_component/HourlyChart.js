@@ -8,7 +8,7 @@ export default class HourlyChart extends React.Component {
 
     state = {
 
-        labels: ['January', 'February', 'March', 'April', 'May'],
+        labels: [],
         datasets: [
             {
 
@@ -55,13 +55,9 @@ export default class HourlyChart extends React.Component {
 
     render() {
         const { todayWeather } = this.props;
-
-        // console.log(todayWeather);
         const { pressure, humidity, temp, weather, sunrise, sunset } = todayWeather;
-
         const temp1 = Math.round(temp.eve - 273.5);
-        const image = weather[0].icon;
-        const imgURL = `owf owf-${ weather[0].id} owf-5x`
+        const imgURL = `owf owf-${weather[0].id} owf-5x`
 
         return (
 
@@ -70,7 +66,7 @@ export default class HourlyChart extends React.Component {
                     <Typography variant={"h3"} style={{ fontWeight: '700' }}>{temp1 + "°C"}</Typography>
                     <Typography style={{ marginLeft: '40px' }}>
                         <i className={imgURL} alt="..."
-                            style={{ maxHeight: '60px'  }} />
+                            style={{ maxHeight: '60px' }} />
                     </Typography>
                 </div>
 
@@ -96,8 +92,8 @@ export default class HourlyChart extends React.Component {
                                                     suggestedMax: 45
                                                 }
                                             }]
-                                            ,gridLines:{
-                                                color:"blue"
+                                            , gridLines: {
+                                                color: "blue"
                                             }
                                         }
                                     }}
